@@ -21,7 +21,7 @@ thirdList.textContent = 'three';
 unorderedList.appendChild(thirdList);
 
 // put that list into the above wrapper
-createDiv.appendChild(unorderedList);
+bodyTag.insertAdjacentElement('afterbegin', unorderedList);
 
 // set the source to an image
 const imageSrc = `src = 'https://picsum.photos/250'`;
@@ -49,7 +49,7 @@ const myHTML = `
   </div>
   `;
 // put this div before the unordered list from above
-createDiv.insertAdjacentHTML('afterbegin', `${myHTML}`);
+bodyTag.insertAdjacentHTML('afterbegin', `${myHTML}`);
 // add a class to the second paragraph called warning
 const secondParagraph = document.getElementsByTagName('p')[1];
 secondParagraph.classList.add('warning');
@@ -57,7 +57,13 @@ secondParagraph.classList.add('warning');
 const firstP = document.querySelector('p');
 firstP.parentNode.removeChild(firstP);
 // create a function called generatePlayerCard that takes in three arguments: name, age, and height
-
+const generatePlayerCard = (name, age, height) => {
+return `
+      <div class="playerCard">
+        <h2>${name} — ${age}</h2>
+      <p>They are ${height} and ${age} years old. In Dog years this person would be ${age * 7}. That would be a tall dog!</p>
+      </div>`;
+}
 // have that function return html that looks like this:
 // <div class="playerCard">
 //   <h2>NAME — AGE</h2>
@@ -65,11 +71,17 @@ firstP.parentNode.removeChild(firstP);
 // </div>
 
 // make a new div with a class of cards
-
+  const newDiv = document.createElement('div');
+  newDiv.classList.add('cards');
 // Have that function make 4 cards
-
+const firstCard = generatePlayerCard('bolly', 3, '70');
+const secondCard = generatePlayerCard('skinny', 2, '50');
+const thirdCard = generatePlayerCard('dols', 3, '70cm');
+const fourthCard = generatePlayerCard('jeddy', 1, '30cm');
 // append those cards to the div
+newDiv.insertAdjacentHTML('afterbegin', firstCard + secondCard + thirdCard + fourthCard);
 // put the div into the DOM just before the wrapper element
+createDiv.insertAdjacentElement('beforebegin', newDiv);
 // Bonus, put a delete Button on each card so when you click it, the whole card is removed
 
 // select all the buttons!
