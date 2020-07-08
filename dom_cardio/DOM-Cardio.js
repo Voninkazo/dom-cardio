@@ -5,6 +5,7 @@ createDiv.classList.add('wrapper');
 // put it into the body
 const bodyTag = document.querySelector('body');
 bodyTag.appendChild(createDiv);
+
 // make an unordered list
 const unorderedList = document.createElement('ul');
 // add three list items with the words "one, two three" in them
@@ -58,10 +59,11 @@ const firstP = document.querySelector('p');
 firstP.parentNode.removeChild(firstP);
 // create a function called generatePlayerCard that takes in three arguments: name, age, and height
 const generatePlayerCard = (name, age, height) => {
-return `
+  return `
       <div class="playerCard">
         <h2>${name} — ${age}</h2>
       <p>They are ${height} and ${age} years old. In Dog years this person would be ${age * 7}. That would be a tall dog!</p>
+      <button class = "delete_button">Delete</button>
       </div>`;
 }
 // have that function return html that looks like this:
@@ -71,19 +73,26 @@ return `
 // </div>
 
 // make a new div with a class of cards
-  const newDiv = document.createElement('div');
-  newDiv.classList.add('cards');
+const newDiv = document.createElement('div');
+newDiv.classList.add('cards');
 // Have that function make 4 cards
-const firstCard = generatePlayerCard('bolly', 3, '70');
-const secondCard = generatePlayerCard('skinny', 2, '50');
-const thirdCard = generatePlayerCard('dols', 3, '70cm');
-const fourthCard = generatePlayerCard('jeddy', 1, '30cm');
+const firstCard = generatePlayerCard('Bolly', 3, '70');
+const secondCard = generatePlayerCard('Skinny', 2, '50');
+const thirdCard = generatePlayerCard('Dols', 3, '70cm');
+const fourthCard = generatePlayerCard('Jeddy', 1, '30cm');
 // append those cards to the div
 newDiv.insertAdjacentHTML('afterbegin', firstCard + secondCard + thirdCard + fourthCard);
 // put the div into the DOM just before the wrapper element
 createDiv.insertAdjacentElement('beforebegin', newDiv);
 // Bonus, put a delete Button on each card so when you click it, the whole card is removed
-
+// add a delete button in the function
+const deleteButtons = document.querySelectorAll('button');
 // select all the buttons!
-// make out delete function
+// make out delete function($event)
+const deleteFunction = ($event) => {
+console.log($event.currentTarget.parentElement.remove());
+}
 // loop over them and attach a listener
+deleteButtons.forEach(button => {
+  button.addEventListener('click', deleteFunction);
+})
